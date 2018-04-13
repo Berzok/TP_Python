@@ -20,6 +20,11 @@ class GrapheNO:
 		for i in range(len(self.adj)):
 			laTaille +=len((self.adj[i]))
 		return laTaille/2
+	def composantesConnexe(self, i):
+		
+		laListe = []
+		laListe.append(i)
+		
 
 def grapheComplet(n):
 	laListe = []
@@ -75,9 +80,33 @@ def aretes_vers_liste_adj(aretes, n):
 				laListe[i].remove(i+1)
 			except:
 				pass
-	print laListe
 	return laListe
 
+def lire_aretes(nomdufichier):
+	lesAretes = []
+	f = file(nomdufichier, 'r')
+	lesLignes = f.readlines()
+	for i in lesLignes:
+		if "#" in i:
+			lesLignes.remove(i)
+			continue
+		if i == "\n":
+			lesLignes.remove(i)
+			continue
+		if "E" in i:
+			lesAretes.append(i)
+			continue
+	print ""
+	longueurAretes = len(lesAretes)
+	for i in range(longueurAretes):
+		uneArete = (lesAretes[i].split()[1:])
+		uneArete[0] = int(uneArete[0])
+		uneArete[1] = int(uneArete[1])
+		print uneArete, "i=", i
+		lesAretes.append(uneArete)
+	for i in range(len(lesAretes)):
+		print lesAretes[i]
+	return lesAretes
 
 def lireAretesEtOrdre(nomdufichier):
     """lit le fichier et renvoie la liste des aretes qui s'y trouvent
@@ -118,7 +147,7 @@ leGraphe3.affiche()
 print ""
 print ""
 print "On va constr8re la liste d'adjacences d'un graphe à partir de ses arêtes et\nde son ordre"
-adjacence4 = aretes_vers_liste_adj([[1, 2], [1, 3], [2, 3]], 3)
+adjacence4 = aretes_vers_liste_adj([[1, 2], [1, 3], [2, 3], [1, 4]], 4)
 print "La liste d'adjacences est: ", adjacence4
 print ""
 print ""
@@ -126,5 +155,8 @@ print "On va créer un graphe à partir d'un fichier"
 liste, ordre = lireAretesEtOrdre("petitgraphe.txt")
 leGraphe4 = GrapheNO(aretes_vers_liste_adj(liste, ordre))
 print ""
+print ""
+print "On va à nouveau créer un graphe à partir d'un fichier"
+liste = lire_aretes("petitgraphe.txt")
 print ""
 
