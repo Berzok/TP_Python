@@ -1,6 +1,3 @@
-#coding: utf-8
-import os
-os.system('clear')
 
 ###############################################################################
 # La classe Graphe Non Oriente
@@ -70,6 +67,12 @@ class GrapheNO:
 		for i in range(len(self.adj)):
 			sommets.append(i)
 		A.append(sommets[0])
+		lesAretes = []
+		for i in range(self.ordre):
+		  lesAretes.append(self.adj[i])
+		for i in range(len(lesAretes)):
+		  
+		print lesAretes
 		print sommets
 		print self
 		return None
