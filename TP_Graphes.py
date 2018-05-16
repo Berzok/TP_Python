@@ -44,13 +44,22 @@ class GrapheNO:
 	def bipartition_valide(self, A, B):
 		"""renvoie un booléen qui indique si A et B forment
 		une bipartition valide du graphe"""
-		print A
-		print B
-		print ""
-		courant = A
+		adjacencesA = []
+		adjacencesB = []
+		for i in range(len(self.adj)):
+		  if i%2==0:
+		      adjacencesA.append(self.adj[i])
+		for i in range(1, len(self.adj)):
+		  if i%2!=0:
+		      adjacencesB.append(self.adj[i])
 		for i in A:
-			if i in B:
-				return False
+		  for j in adjacencesA:
+		    if i in j:
+		      return False
+		for i in B:
+		  for j in adjacencesB:
+		    if i in j:
+		      return False
 		return True
 
 
@@ -63,19 +72,20 @@ class GrapheNO:
 		un couple [A,B] formant une bipartition s'il l'est"""
 		A = []
 		B = []
-		sommets = []
-		for i in range(len(self.adj)):
-			sommets.append(i)
-		A.append(sommets[0])
-		lesAretes = []
-		for i in range(self.ordre):
-		  lesAretes.append(self.adj[i])
-		for i in range(len(lesAretes)):
-		  
-		print lesAretes
-		print sommets
-		print self
-		return None
+		sommetsA = []
+		sommetsB = []
+		for i in self.adj:
+			if self.adj.index(i)%2==0:
+			  sommetsA.append(i)
+			if self.adj.index(i)%2!=0:
+			  sommetsB.append(i)
+		for i in sommetsA:
+		  A.append(i[1]-1)
+		for i in sommetsB:
+		  B.append(i[0]+1)
+		if self.bipartition_valide(A, B):
+		  return A, B
+		return False
 
 
 ###############################################################################
