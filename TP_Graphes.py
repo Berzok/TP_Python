@@ -87,6 +87,34 @@ class GrapheNO:
 		  return A, B
 		return False
 
+		
+###############################################################################
+# Question Bonus 1
+###############################################################################
+
+	def alt_est_biparti(self):
+		def sommets_check(lesSommets, a, b):
+			if len(lesSommets) == 0:
+				return True
+			courant = lesSommets[0]
+			liaisons = [x for x in self.adj[courant]]
+			print liaisons
+			if courant in a and courant not in b and any(x in a for x in liaisons):
+				b.append(liaisons[1])
+				return sommets_check(lesSommets[1:], a, b)
+			if courant in b and courant not in a and any(x in b for x in liaisons):
+				a.append(liaisons[1])
+				return sommets_check(lesSommets[1:], a, b)
+			return False
+		A = []
+		B = []
+		lesSommets = [x for x in range(len(self.adj))]
+		print lesSommets
+		A.append(lesSommets[0])
+		return sommets_check(lesSommets, A, B)
+
+
+
 
 ###############################################################################
 # Constructeurs de graphes
@@ -216,4 +244,19 @@ else:
     #test sur un cycle à 11 sommets
     g = cycle(11)
     res = g.est_biparti()
+    print res
+
+
+#Question 4
+print "\n"+"*"*30
+#test sur un cycle à 10 sommets
+g = cycle(10)
+res = g.alt_est_biparti()
+if res==None:
+    print "Question Bonus non traitée"
+else:
+    print res
+    #test sur un cycle à 11 sommets
+    g = cycle(11)
+    res = g.alt_est_biparti()
     print res
