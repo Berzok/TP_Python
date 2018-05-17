@@ -98,19 +98,18 @@ class GrapheNO:
 				return True
 			courant = lesSommets[0]
 			liaisons = [x for x in self.adj[courant]]
-			print liaisons
-			if courant in a and courant not in b and any(x in a for x in liaisons):
+			if courant in a and courant not in b and any(x in a for x in liaisons)==False:
 				b.append(liaisons[1])
 				return sommets_check(lesSommets[1:], a, b)
-			if courant in b and courant not in a and any(x in b for x in liaisons):
+			if courant in b and courant not in a and not any(x in b for x in liaisons):
 				a.append(liaisons[1])
 				return sommets_check(lesSommets[1:], a, b)
 			return False
 		A = []
 		B = []
 		lesSommets = [x for x in range(len(self.adj))]
-		print lesSommets
 		A.append(lesSommets[0])
+		B.append(self.adj[0][1])
 		return sommets_check(lesSommets, A, B)
 
 
@@ -255,8 +254,10 @@ res = g.alt_est_biparti()
 if res==None:
     print "Question Bonus non traitée"
 else:
+    print "Fonction finie"
     print res
     #test sur un cycle à 11 sommets
     g = cycle(11)
     res = g.alt_est_biparti()
+    print "Fonction finie"
     print res
