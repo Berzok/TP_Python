@@ -101,7 +101,7 @@ class GrapheNO:
 			if courant in a and courant not in b and any(x in a for x in liaisons)==False:
 				b.append(liaisons[1])
 				return sommets_check(lesSommets[1:], a, b)
-			if courant in b and courant not in a and not any(x in b for x in liaisons):
+			if courant in b and courant not in a and any(x in b for x in liaisons)==False:
 				a.append(liaisons[1])
 				return sommets_check(lesSommets[1:], a, b)
 			return False
