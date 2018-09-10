@@ -2,7 +2,6 @@
 import os
 import random
 
-os.system('clear')
 
 def creer_tableau():
 	tab = []
@@ -22,19 +21,21 @@ def echanger_elements(tableau, a, b):
 	tableau[b] = leTemporaire
 
 
-def placer_dans_tableau(tableau):
-	indice = 0
-	droite = len(tableau)-1
-	bas = indice+1
+def placer_dans_tableau(tableau, gauche, droite):
+	bas = gauche+1
 	haut = droite
 	while bas <= haut:
 		while tableau[bas] <= tableau[gauche]:
 			bas += 1
 		while tableau[haut] > tableau[gauche]:
-			haut += 1
+			haut -= 1
 		if bas < haut:
-			echanger_elements(bas, haut)
-	echanger_ele
+			echanger_elements(tableau, bas, haut)
+			bas += 1
+			haut -= 1
+	echanger_elements(tableau, gauche, haut)
+	k = haut
+	return tableau, k
 
 
 
@@ -51,6 +52,7 @@ def alea_tableau(*n):
 
 
 def afficher_tableau(tab):
+	print "
 	for i in tab:
 		if i is tab[0]:
 			print "["+str(i)+",",
@@ -66,13 +68,13 @@ def verification_tri_rapide(tab):
 		print oui
 
 
-def tri_rapide(tab):
-	pivot = tab[0]
-	bas = tab[1]
-	haut = tab[len(tab)-1]
-	for i in tab[1::]:
-		for j in reversed(tab):
-			print i, j
+def tri_rapide(tableau, gauche, droite):
+	k = 0
+	if gauche < droite:
+		tableau, k = placer_dans_tableau(tableau, gauche, droite)
+		tableau = tri_rapide(tableau, gauche, k-1)
+		tableau = tri_rapide(tableau, k+1, droite)
+		return tableau
 
 print "Taille limite du tableau ? Ou rien pour une taille aléatoire"
 valeur = raw_input()
@@ -82,5 +84,5 @@ else:
 	tableau = alea_tableau(valeur)
 afficher_tableau(tableau)
 
-tri_rapide(tableau)
-
+tableau = tri_rapide(tableau, 0, len(tableau)-1)
+afficher_tableau(tableau)
