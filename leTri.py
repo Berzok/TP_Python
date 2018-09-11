@@ -1,4 +1,3 @@
-#coding: utf-8
 import os
 import random
 
@@ -22,9 +21,11 @@ def echanger_elements(tableau, a, b):
 
 
 def placer_dans_tableau(tableau, gauche, droite):
-	bas = gauche+1
-	haut = droite
-	while bas <= haut:
+  bas = gauche+1
+  haut = droite
+  print tableau[bas]
+  print tableau[gauche]
+  while bas <= haut:
 		while tableau[bas] <= tableau[gauche]:
 			bas += 1
 		while tableau[haut] > tableau[gauche]:
@@ -33,9 +34,9 @@ def placer_dans_tableau(tableau, gauche, droite):
 			echanger_elements(tableau, bas, haut)
 			bas += 1
 			haut -= 1
-	echanger_elements(tableau, gauche, haut)
-	k = haut
-	return tableau, k
+  echanger_elements(tableau, gauche, haut)
+  k = haut
+  return tableau, k
 
 
 
@@ -52,7 +53,7 @@ def alea_tableau(*n):
 
 
 def afficher_tableau(tab):
-	print "
+	print ""
 	for i in tab:
 		if i is tab[0]:
 			print "["+str(i)+",",
@@ -63,14 +64,12 @@ def afficher_tableau(tab):
 		print str(i)+",",
 
 
-def verification_tri_rapide(tab):
-	for j in range(len(tab)-1):
-		print oui
 
 
 def tri_rapide(tableau, gauche, droite):
-	k = 0
-	if gauche < droite:
+  afficher_tableau(tableau)
+  k = 0
+  if gauche < droite:
 		tableau, k = placer_dans_tableau(tableau, gauche, droite)
 		tableau = tri_rapide(tableau, gauche, k-1)
 		tableau = tri_rapide(tableau, k+1, droite)
