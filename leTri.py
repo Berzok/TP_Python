@@ -2,6 +2,7 @@
 import os
 import random
 
+os.system('clear')
 
 def creer_tableau():
 	tab = []
@@ -24,7 +25,6 @@ def echanger_elements(tableau, a, b):
 def placer_dans_tableau(tableau, gauche, droite):
 	bas = gauche+1
 	haut = droite
-	afficher_tableau(tableau)
 	while bas <= haut:
 		while tableau[bas] <= tableau[gauche]:
 			bas += 1
@@ -42,13 +42,14 @@ def placer_dans_tableau(tableau, gauche, droite):
 
 def alea_tableau(*n):
 	tableau = []
-	if not n:
-		taille = random.randint(1, 100)
-	else:
+	try:
 		n = int(n[0])
 		taille = n
+	except:
+		taille = random.randint(1, 1000)
 	for i in range(taille):
-		tableau.append(random.randint(-100, 100))
+		tableau.append(random.randint(-999, 1000))
+	tableau.append(max(tableau)+(random.randint(0, 413)))
 	return tableau
 
 
@@ -67,7 +68,6 @@ def afficher_tableau(tab):
 
 
 def tri_rapide(tableau, gauche, droite):
-	afficher_tableau(tableau)
 	k = 0
 	if gauche < droite:
 		tableau, k = placer_dans_tableau(tableau, gauche, droite)
@@ -77,11 +77,7 @@ def tri_rapide(tableau, gauche, droite):
 
 print "Taille limite du tableau ? Ou rien pour une taille aléatoire"
 valeur = raw_input()
-if valeur == "" or valeur == " ":
-	tableau = alea_tableau()
-else:
-	tableau = alea_tableau(valeur)
-afficher_tableau(tableau)
+tableau = alea_tableau()
 
 tableau = tri_rapide(tableau, 0, len(tableau)-1)
 afficher_tableau(tableau)
