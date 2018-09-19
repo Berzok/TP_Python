@@ -38,7 +38,7 @@ def afficher_tableau(leTableau):
 def triParInsertion(tableau):
 	i = 0
 	j = 0
-	for i in range(2, len(tableau)-1):
+	for i in range(1, len(tableau)):
 		j = i-1
 		laValeur = tableau[i]
 		while tableau[j] > laValeur:
