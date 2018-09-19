@@ -5,48 +5,6 @@ import random
 os.system('clear')
 
 
-def set_global():
-	global compteur
-	compteur = 0
-
-
-def creer_tableau():
-	tab = []
-	print "Entrez une valeur à ajouter à la liste à trier, ou rien pour arrêter"
-	while True:
-		valeur = raw_input()
-		if valeur == " " or valeur == "":
-			break
-		tab.append(valeur)
-		afficher_tableau(tab)
-	return tab
-
-
-def echanger_elements(tableau, a, b):
-	leTemporaire = tableau[a]
-	tableau[a] = tableau[b]
-	tableau[b] = leTemporaire
-
-
-def placer_dans_tableau(tableau, gauche, droite):
-	compteur += 1
-	bas = gauche+1
-	haut = droite
-	while bas <= haut:
-		while tableau[bas] <= tableau[gauche]:
-			bas += 1
-		while tableau[haut] > tableau[gauche]:
-			haut -= 1
-			compteur += 1
-		if bas < haut:
-			echanger_elements(tableau, bas, haut)
-			bas += 1
-			haut -= 1
-	echanger_elements(tableau, gauche, haut)
-	k = haut
-	return tableau, k, compteur
-
-
 
 def alea_tableau(*n):
 	tableau = []
@@ -65,6 +23,55 @@ def alea_tableau(*n):
 		return tableau
 
 
+def creer_tableau():
+	tab = []
+	print "Entrez une valeur à ajouter à la liste à trier, ou rien pour arrêter"
+	while True:
+		valeur = raw_input()
+		if valeur == " " or valeur == "":
+			break
+		tab.append(valeur)
+		afficher_tableau(tab)
+	return tab
+
+
+
+def tri_rapide(tableau, gauche, droite, leCompteur=0):
+	leCompteur = 0 + leCompteur
+	k = 0
+	if gauche < droite:
+		tableau, k, leCompteur = placer_dans_tableau(tableau, gauche, droite, leCompteur)
+		tableau, leCompteur = tri_rapide(tableau, gauche, k-1, leCompteur)
+		tableau, leCompteur = tri_rapide(tableau, k+1, droite, leCompteur)
+	return tableau, leCompteur
+
+def placer_dans_tableau(tableau, gauche, droite, leCompteur):
+	afficher_tableau(tableau)
+	bas = gauche+1
+	haut = droite
+	while bas <= haut:
+		while tableau[bas] <= tableau[gauche]:
+			bas += 1
+			leCompteur += 1
+		while tableau[haut] > tableau[gauche]:
+			haut -= 1
+			leCompteur += 1
+		if bas < haut:
+			echanger_elements(tableau, bas, haut)
+			bas += 1
+			haut -= 1
+		leCompteur += 1
+	echanger_elements(tableau, gauche, haut)
+	k = haut
+	return tableau, k, leCompteur
+
+def echanger_elements(tableau, a, b):
+	leTemporaire = tableau[a]
+	tableau[a] = tableau[b]
+	tableau[b] = leTemporaire
+
+
+
 def afficher_tableau(tab):
 	print ""
 	for i in tab:
@@ -79,25 +86,15 @@ def afficher_tableau(tab):
 
 
 
-def tri_rapide(tableau, gauche, droite):
-	k = 0
-	leCompteur
-	if gauche < droite:
-		tableau, k, leCompteur = placer_dans_tableau(tableau, gauche, droite)
-		tableau = tri_rapide(tableau, gauche, k-1)
-		tableau = tri_rapide(tableau, k+1, droite)
-	return tableau
-
-
-compteur = 1
-
-set_global()
 
 
 print "Taille limite du tableau ? Ou rien pour une taille aléatoire"
 valeur = raw_input()
+unCompteur = 0
 tableau = alea_tableau(valeur)
-
-tableau = tri_rapide(tableau, 0, len(tableau)-1)
 afficher_tableau(tableau)
-print "Il y a eu "+str(compteur)+" comparaisons"
+
+tableau, unCompteur = tri_rapide(tableau, 0, len(tableau)-1, 0)
+afficher_tableau(tableau)
+print "Il y a eu "+str(unCompteur)+" comparaisons."
+
