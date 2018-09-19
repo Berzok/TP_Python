@@ -46,7 +46,6 @@ def tri_rapide(tableau, gauche, droite, leCompteur=0):
 	return tableau, leCompteur
 
 def placer_dans_tableau(tableau, gauche, droite, leCompteur):
-	afficher_tableau(tableau)
 	bas = gauche+1
 	haut = droite
 	while bas <= haut:
@@ -70,6 +69,15 @@ def echanger_elements(tableau, a, b):
 	tableau[a] = tableau[b]
 	tableau[b] = leTemporaire
 
+
+def avgComparaisons(n, p):
+	leCompteur = 0
+	for i in range(p):
+		tableau = alea_tableau(n)
+		unCompteur = 0
+		tableau, unCompteur = tri_rapide(tableau, 0, len(tableau)-1, 0)
+		leCompteur += unCompteur
+	return leCompteur
 
 
 def afficher_tableau(tab):
@@ -97,4 +105,15 @@ afficher_tableau(tableau)
 tableau, unCompteur = tri_rapide(tableau, 0, len(tableau)-1, 0)
 afficher_tableau(tableau)
 print "Il y a eu "+str(unCompteur)+" comparaisons."
+print ""
+
+print "##########################################################################"
+print "Sélectionnez une taille de tableau:"
+n = int(input())
+print "Sélectionnez maintenant un nombre de tableaux:"
+p = int(input())
+
+lesComparaisons = avgComparaisons(n, p)
+print ""
+print "Pour " + str(p) + " tableaux de taille " +str(n) + ", on aura effectué " + str(lesComparaisons) + " comparaisons."
 
