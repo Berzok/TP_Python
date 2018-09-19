@@ -1,0 +1,20 @@
+FORMAT D'UN FICHIER AUTOMATES
+commentaires au debut
+puis dans l'ordre :
+    1. une ligne "ALPHABET s1 s2 ..." où s1, s2, ... sont les symboles (str) de l'alphabet
+    2. une ligne "ETATS q1 q2 ..." où q1, q2, etc. sont les noms (str) des états
+    3. autant de lignes "TRANSITION  etat_depart  symbole etat_arrivee1 etat_arrivee2 " que nécessaire
+    4. une ligne "INITIAUX i1 i2 ..." liste des etats initiaux
+    5. une ligne "FINALS f1 f2 ..." liste des etats finals
+
+ALPHABET a b
+ETATS Q1 Q2 Q3
+TRANSITION Q1 a Q2
+TRANSITION Q1 b Q1
+TRANSITION Q2 a Q3
+TRANSITION Q2 b Q3
+TRANSITION Q3 a Q2
+TRANSITION Q3 b Q1
+INITIAUX Q1
+FINALS Q2
+
