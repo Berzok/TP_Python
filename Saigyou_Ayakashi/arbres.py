@@ -5,22 +5,27 @@ from affiche_arbre import *
 from affiche_arbre import TreeDrawer
 
 def parcoursProfondeur(arbre):
-	nombreVisites = [[]]
-	nombreVisites[0].append(1)
-	saigyou = []
-	print nombreVisites
 	if arbre != None:
 		parcourir(arbre.gauche, saigyou)
 		parcourir(arbre.droite, saigyou)
 		return saigyou
 
+def prefixe(arbre):
+	if arbre != None:
+		flower_viewing_event(arbre)
+		prefixe(arbre.G)
+		prefixe(arbre.D)
 
-def parcourirArbre(arbre):
-	
+
+def symetrique(arbre):
+	if arbre != None:
+		symetrique(arbre.G)
+		flower_viewing_event(arbre)
+		symetrique(arbre.D)
 
 
-def verificationArbre(arbre):
-	
+def flower_viewing_event(arbre):
+	print arbre.val,
 
 
 
@@ -28,8 +33,9 @@ cerisier = entrerArbre(0)
 
 treeDrawer = TreeDrawer()
 treeDrawer.dessiner_arbre(cerisier)
-
-parcoursProfondeur(cerisier)
-
-
 treeDrawer.wait()
+
+prefixe(cerisier)
+
+
+
