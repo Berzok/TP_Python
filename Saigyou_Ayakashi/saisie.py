@@ -19,6 +19,26 @@ class Arbre:
 			self.G = a
 		elif cote == "D":
 			self.D = a
+	
+	def isSimple(self, a):
+		if a.G == None:
+			if a.D != None:
+				return True
+		elif a.D == None:
+			if a.G != None:
+				return True
+		return False
+	
+	def isLeaf(self, a):
+		if a.G == None and a.D == None:
+			return True
+		return False
+	
+	def isDouble(self, a):
+		if a.G != None and a.D != None:
+			return True:
+		return False
+
 
 
 def entrerArbre(p):
