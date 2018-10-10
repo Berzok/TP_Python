@@ -60,16 +60,56 @@ def suffixe(arbre):
 
 
 def flower_viewing_event(arbre):
-	print arbre.val,
+	laExpression = ""
+	if arbre.G != None and arbre.D != None:
+		laExpression += balade(arbre.G) + arbre.val + balade(arbre.D)
+	if (arbre.G != None and arbre.D == None) or (arbre.G == None and arbre.D != None):
+		laExpression += arbre.val
+	return laExpression
+
+
+def balade(arbre):
+	if(arbre.G != None and arbre.D == None) or (arbre.G == None and arbre.D != None) or (arbre.G == None and arbre.D == None):
+		return arbre.val
+	elif (arbre.G != None and arbre.D != None):
+		return "(" + balade(arbre.G) + " " + arbre.val + " " + balade(arbre.D) + ")"
+	else:
+		return ""
+
+
+def laFusion(pommier, poirier, operande):
+	return Arbre(pommier, poirier, operande)
+
+def leRemplacement(laExpression, X, a):
+	return laExpression.replace(X, a)
+
+
+def calculExpression(expression):
+	listeValeurs = []
+	laListe = list(expression)
+	print laListe
+	for i in laListe:
+		if i.isdigit():
+			listeValeurs.append(i)
+	
+	print listeValeurs
 
 
 
-cerisier = entrerArbre(0)
+cerisier = entrerArbre(1)
 
 treeDrawer = TreeDrawer()
 treeDrawer.dessiner_arbre(cerisier)
 treeDrawer.wait()
-symetrique(cerisier)
+#symetrique(cerisier)
+
+laExpression = flower_viewing_event(cerisier)
+print laExpression
+acacia = laFusion(cerisier, cerisier, "-")
+
+calculExpression(laExpression)
+
+
 
 
 

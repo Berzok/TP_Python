@@ -36,7 +36,7 @@ class Arbre:
 	
 	def isDouble(self, a):
 		if a.G != None and a.D != None:
-			return True:
+			return True
 		return False
 
 
