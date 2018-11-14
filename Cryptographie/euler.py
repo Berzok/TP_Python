@@ -24,16 +24,18 @@ def decomP(n, i=2, tab=[2]):
 
 
 
-def euler(n, tab):
-	value = 0
+def euler(n):
+	tab = decomP(n)
 	index = []
-	cnt = Counter(tab)
-	cnt = cnt.items()
-	print cnt[2][1]
-	for i in tab:
-		pass
-	print index
-	return None
+	resultat = 1
+	i = 0
+	while i<len(tab):
+		index.append(tab.count(tab[i]))
+		i += tab.count(tab[i])
+	tab = list(set(tab))
+	for i in range(len(index)):
+		resultat *= pow(tab[i],  index[i]) - pow(tab[i], index[i]-1)
+	return resultat
 
 
 
@@ -43,7 +45,7 @@ tab = decomP(n)
 print tab
 
 
-laEuler = euler(n, tab)
+laEuler = euler(n)
 print laEuler
 
 
