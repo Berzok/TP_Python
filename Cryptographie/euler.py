@@ -1,6 +1,5 @@
 #coding: utf-8
 import os
-from collections import Counter
 
 os.system('clear')
 
@@ -23,35 +22,54 @@ def decomP(n, i=2, tab=[2]):
 		return decomP(n, i+1, tab)
 
 
-
-def euler(n):
-	tab = decomP(n)
+def euler(n, tab):
 	index = []
 	resultat = 1
 	i = 0
-	while i<len(tab):
+	while i<len(tab):											#Création tableau du nombre d'occurrences
 		index.append(tab.count(tab[i]))
 		i += tab.count(tab[i])
 	tab = list(set(tab))
 	for i in range(len(index)):
-		resultat *= pow(tab[i],  index[i]) - pow(tab[i], index[i]-1)
+		resultat *= pow(tab[i], index[i]) - pow(tab[i], index[i]-1)
 	return resultat
 
+def congruence(x, n):
+	return x%n
+
+def euclide2(tab):
+	x = tab[0][2] * tab[0][3]
+	print x
+
+def euclide(a, b, tab=[]):
+	if(b == 1):
+		return tab
+	else:
+		tab.append([])
+		tab[len(tab)-1].append(a)
+		tab[len(tab)-1].append(b)
+		tab[len(tab)-1].append(a//b)
+		tab[len(tab)-1].append(a%b)
+		return euclide(b, a%b, tab)
 
 
 
-n = int(input("Entrez un nombre: "))
-tab = decomP(n)
-print tab
+#n = int(input("Entrez un nombre: "))
+#tab = decomP(n)
+#print tab
 
 
-laEuler = euler(n)
-print laEuler
+#laEuler = euler(n, tab)
+#print laEuler
 
 
-
-
-
+a = int(input("a: "))
+b = int(input("b: "))
+d = euclide(a, b)
+d = d[::-1]
+print "n =", len(d)
+print d
+d = euclide2(d)
 
 
 
