@@ -37,9 +37,18 @@ def euler(n, tab):
 def congruence(x, n):
 	return x%n
 
-def euclide2(tab):
-	x = tab[0][2] * tab[0][3]
-	print x
+def euclide2(a, b, x=-100, y=-100):
+	for x in range(-100, 100):
+		for y in range(-100, 100):
+			if((a * x + b * y) == 1):
+				tab = []
+				tab.append(x)
+				tab.append(y)
+				return tab
+	tab = []
+	tab.append(x)
+	tab.append(y)
+	return tab
 
 def euclide(a, b, tab=[]):
 	if(b == 1):
@@ -69,7 +78,8 @@ d = euclide(a, b)
 d = d[::-1]
 print "n =", len(d)
 print d
-d = euclide2(d)
+tab = euclide2(a, b)
+print tab
 
 
 
